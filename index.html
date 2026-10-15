@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AnimeKu - Nonton Anime Sub Indo</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f4f4f8;--card:#fff;--text:#16151f;--muted:#6a6880;--accent:#e11d48;--line:#e2e1ea;--nav:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e14;--card:#181822;--text:#f2f1fa;--muted:#9391ab;--line:#2a2a3a;--nav:#13131c}}
+:root[data-theme="dark"]{--bg:#0e0e14;--card:#181822;--text:#f2f1fa;--muted:#9391ab;--line:#2a2a3a;--nav:#13131c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--nav);border-bottom:2px solid var(--accent)}
+.bar{max-width:1200px;margin:0 auto;display:flex;gap:14px;align-items:center;padding:10px 16px;flex-wrap:wrap}
+.logo{font-weight:900;font-size:22px;letter-spacing:-.5px}.logo b{color:var(--accent)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{padding:6px 10px;border-radius:8px;font-size:14px;color:var(--muted);cursor:pointer}
+nav a.on,nav a:hover{background:var(--accent);color:#fff}
+.sp{flex:1}
+input,button{font:inherit;color:var(--text);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 12px}
+button{cursor:pointer}button.p{background:var(--accent);color:#fff;border-color:var(--accent)}
+main{max-width:1200px;margin:0 auto;padding:16px}
+.layout{display:grid;grid-template-columns:1fr 300px;gap:20px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.hero{border-radius:14px;min-height:160px;display:flex;align-items:center;justify-content:center;padding:22px;color:#fff;margin-bottom:20px;position:relative;overflow:hidden}
+.hero h1{margin:4px 0;font-size:28px;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.hero p{margin:0;max-width:520px;font-size:14px;opacity:.9}
+.tag{display:inline-block;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px}
+.sec{display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;border-left:4px solid var(--accent);padding-left:10px}
+.sec h2{margin:0;font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;margin-bottom:24px}
+.card{cursor:pointer;position:relative}
+.poster{aspect-ratio:2/3;border-radius:10px;display:flex;align-items:flex-end;padding:8px;color:#fff;font-weight:700;font-size:13px;text-shadow:0 1px 4px rgba(0,0,0,.6);position:relative;overflow:hidden;transition:transform .15s}
+.card:hover .poster{transform:scale(1.03)}
+.badge{position:absolute;top:6px;left:6px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px}
+.badge.r{left:auto;right:6px;background:rgba(0,0,0,.65)}
+.ct{font-size:13px;margin-top:6px;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:18px}
+.box h3{margin:0 0 10px;font-size:16px}
+.rank{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px}
+.rank:last-child{border:0}
+.rank i{font-style:normal;font-weight:800;color:var(--accent);width:22px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;padding:4px 10px;border-radius:20px;border:1px solid var(--line);cursor:pointer;color:var(--muted)}
+.chip.on,.chip:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.days{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.days .chip{border-radius:6px}
+.sch{font-size:13px;padding:6px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;cursor:pointer}
+.sch span:last-child{color:var(--muted)}
+.empty{color:var(--muted);padding:30px 0;text-align:center}
+#view{display:none}
+.player{background:#000;border-radius:12px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:#aaa;text-align:center;padding:12px;overflow:hidden}
+.player video{width:100%;height:100%}
+.urlrow{display:flex;gap:8px;margin:10px 0}.urlrow input{flex:1;min-width:0}
+.eps{display:grid;grid-template-columns:repeat(auto-fill,minmax(50px,1fr));gap:6px;max-height:340px;overflow:auto}
+.eps button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.desc{color:var(--muted);line-height:1.6;font-size:14px}
+.note{font-size:12px;color:var(--muted);margin-top:6px}
+.gtile{aspect-ratio:16/6;border-radius:10px;padding:6px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.6);transition:transform .15s}.gtile:hover{transform:scale(1.04)}.gtile b{font-size:14px}.gtile span{font-size:11px;opacity:.9}
+.gh{grid-column:1/-1;margin:12px 0 4px;font-size:16px}.gh small{color:var(--muted);font-weight:400}
+.btn{display:inline-block;padding:8px 14px;border-radius:8px;border:1px solid var(--line);text-decoration:none;color:var(--text);cursor:pointer;background:var(--card);font-size:14px}.btn.p{background:var(--accent);color:#fff;border-color:var(--accent)}textarea{font:inherit;color:var(--text);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.qr{background:#fff;padding:8px;border-radius:8px;display:inline-block;line-height:0;max-width:100%;box-sizing:border-box;word-break:break-all;color:#333}.qr img,.qr canvas{max-width:100%}.qrimg{width:180px;max-width:100%;background:#fff;padding:8px;border-radius:8px}
+.vgl{font-weight:700;font-size:13px;color:var(--text);margin-bottom:6px}
+#recs .poster{border-radius:5px;padding:3px}#recs .ct{font-size:10px;margin-top:3px;line-height:1.25;-webkit-line-clamp:2}#recs .badge{font-size:8px;padding:1px 3px;top:2px;left:2px}#recs .badge.r{display:none}
+@media(max-width:900px){.sp{display:none}#recs{grid-template-columns:repeat(3,1fr)!important;gap:8px!important}#recs .ct{font-size:11px;-webkit-line-clamp:3}}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:24px}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <span class="logo" id="logo">Anime<b>Ku</b></span>
+  <nav id="nav"><a class="on" data-n="home">Beranda</a><a data-n="ongoing">Sedang Tayang</a><a data-n="done">Selesai</a><a data-n="genre">Genre</a><a data-n="jadwal">Jadwal</a><a data-n="tentang">Tentang</a></nav>
+  <span class="sp"></span>
+  <input id="q" placeholder="Cari anime…">
+  <button id="th" title="Tema">🌓</button>
+</div></header>
+<main>
+<div id="list">
+ <div class="layout">
+  <div>
+   <div class="hero" id="hero"></div>
+   <div class="sec"><h2 id="lt">Episode Terbaru</h2></div>
+   <div class="grid" id="grid"></div>
+  </div>
+  <aside>
+   <div class="box"><h3>🔥 Populer</h3><div id="rank"></div></div>
+   <div class="box"><h3>💖 Donasi</h3><p class="note" style="margin:0 0 10px">Bantu pengembangan situs.</p><div id="sbdonasi" style="text-align:center"></div><a class="btn" data-n="tentang" style="margin-top:10px;display:block;text-align:center">Info donasi lengkap</a></div>
+   <div class="box"><h3>Genre <a data-n="genre" style="font-size:12px;font-weight:400;color:var(--accent);cursor:pointer;float:right">Lihat semua</a></h3><div class="chips" id="chips"></div></div>
+  </aside>
+ </div>
+</div>
+<div id="view">
+ <button id="back" style="margin-bottom:12px">← Kembali</button>
+ <div class="layout">
+  <div>
+   <div class="sec"><h2 id="vt"></h2></div><div class="desc" id="vd" style="margin-bottom:14px"></div>
+   <div class="player" id="player"></div>
+   <div class="urlrow"><input id="url" placeholder="Link YouTube / Mega atau URL video (.mp4 / .webm / .m3u8)"><button class="p" id="play">Putar</button></div>
+   <div class="note" id="alt"></div>
+  </div>
+  <aside><div class="box"><h3>Episode</h3><div class="eps" id="eps"></div><div class="note">URL tiap episode tersimpan di browser ini.</div></div><div class="box" id="dlbox"><h3>⬇️ Download</h3><div id="dllist" class="eps"></div><div class="note" id="dlnote"></div></div>
+  <div class="box" id="recbox"><h3>Rekomendasi Anime</h3><div class="grid" id="recs" style="grid-template-columns:repeat(4,1fr);gap:6px;margin:0"></div></div></aside>
+ </div>
+</div>
+</main>
+<footer>AnimeKu · Situs Nonton Anime Sub Indonesia</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const DAYS=["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"];
+// ====== PENGATURAN SITUS: ganti nilai di bawah dengan milikmu ======
+// Donasi: {n:"Nama",qr:"https://link"} = QR dibuat otomatis dari link; {n:"QRIS",img:"img/qris.png"} = pakai gambar QR sendiri.
+const SITE={
+  logo:"",   // gambar logo situs, mis. "img/logo.png" (kosong = pakai logo bawaan)
+  telegram:"https://t.me/GANTI_NAMA_GRUP",
+  email:"emailmu@contoh.com",
+  donasi:[
+    {n:"",qr:"https://saweria.co/GANTI_USERNAME"},
+  ]
+};
+const donasi=()=>`<div style="grid-column:1/-1"><div class="box"><h3>💖 Dukung AnimeKu</h3><p class="desc">Donasi membantu pengembangan situs. Berapa pun sangat berarti, terima kasih!</p>${SITE.donasi.map(d=>`<div class="sch" style="${d.n?'':'justify-content:center'}"><span>${d.n||''}</span><span>${d.qr?`<div class="qr" data-qr="${d.qr}"></div>`:d.img?`<img class="qrimg" src="${d.img}" alt="QR ${d.n}">`:d.link?`<a class="btn p" href="${d.v}" target="_blank" rel="noopener">Donasi</a>`:d.v}</span></div>`).join("")}</div></div>`;
+const mkqr=()=>document.querySelectorAll(".qr").forEach(el=>{el.innerHTML="";if(window.QRCode)new QRCode(el,{text:el.dataset.qr,width:180,height:180});else{el.style.lineHeight="1.4";el.textContent=el.dataset.qr}});
+const donasiMini=()=>SITE.donasi.map(d=>d.qr?`<div class="qr" data-qr="${d.qr}"></div>`:d.img?`<img class="qrimg" src="${d.img}" alt="QR donasi">`:d.link?`<a class="btn p" href="${d.v}" target="_blank" rel="noopener">${d.n||'Donasi'}</a>`:`<div class="note">${d.n} ${d.v||''}</div>`).join("");
+const kontak=()=>`<div style="grid-column:1/-1"><div class="box"><h3>✉️ Hubungi Kami</h3><p class="desc">Ada saran, request anime, atau laporan masalah? Kirim pesan lewat form ini atau hubungi kami di Telegram.</p><input id="cn" placeholder="Nama" style="width:100%;margin:4px 0"><input id="cs" placeholder="Subjek" style="width:100%;margin:4px 0"><textarea id="cm" rows="5" placeholder="Tulis pesanmu…" style="width:100%;margin:4px 0"></textarea><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="p" id="csend">Kirim lewat Email</button><a class="btn" href="${SITE.telegram}" target="_blank" rel="noopener">Chat di Telegram</a></div><div class="note">Email: ${SITE.email}</div></div></div>`;
+const tentang=()=>`<div style="grid-column:1/-1"><div class="box"><h3>ℹ️ Tentang AnimeKu</h3><p class="desc">AnimeKu adalah katalog anime berbahasa Indonesia berisi daftar anime, genre, dan jadwal rilis. Di halaman ini kamu bisa bergabung dengan komunitas, mendukung situs lewat donasi, atau menghubungi kami.</p></div></div><div style="grid-column:1/-1"><div class="box"><h3>💬 Grup Telegram</h3><p class="desc">Gabung untuk info rilis terbaru, request anime, dan diskusi bareng.</p><a class="btn p" href="${SITE.telegram}" target="_blank" rel="noopener">Join Grup Telegram</a></div></div>${donasi()}${kontak()}`;
+// Download: isi dl:{1:"https://link-file"} per episode, hanya untuk file yang kamu berhak membagikannya.
+// Thumbnail/poster: isi p:"link-gambar.jpg" (kosong = pakai warna gradien)
+// Isi link video di v: tulis di antara tanda kutip pada nomor episodenya, contoh  1:"https://youtube.com/watch?v=..."
+// ============================ PANDUAN MENAMBAH ANIME BARU ============================
+// LANGKAH: 1) Salin contoh di bawah.  2) Tempel SETELAH anime terakhir di daftar DATA.
+//          3) Ubah isinya.  4) Cek koma dan kurungnya.  5) Simpan lalu upload ulang.
+//
+// CONTOH (salin dari tanda { sampai },) -- tulisan setelah // adalah keterangan, boleh dihapus:
+// {id:45,                        // nomor unik, lanjutkan dari id terakhir (angka, tanpa kutip)
+//  t:"Judul Anime",              // judul, pakai kutip
+//  p:"",                         // poster, mis. "img/judul.jpg" (boleh kosong)
+//  dl:{},                        // link download, mis. {1:"https://..."} (boleh kosong)
+//  v:{                           // link video per episode
+//    1:"",                       // episode 1 (kosong = tampil "belum tersedia")
+//    2:"",                       // episode 2, dan seterusnya sampai total episode
+//  },
+//  g:["Fantasy","Action"],       // genre, di dalam [ ] dipisah koma
+//  y:2026,                       // tahun rilis (angka)
+//  e:12,                         // TOTAL episode (angka)
+//  l:1,                          // episode TERAKHIR yang sudah tayang (angka)
+//  day:3,                        // hari tayang: 0=Senin ... 6=Minggu (HAPUS baris ini kalau sudah tamat)
+//  c:["#7c3aed","#ec4899"],      // dua warna poster (dipakai kalau p kosong)
+//  d:"Sinopsis singkat."},       // sinopsis; di akhir ada koma setelah }
+//
+// ATURAN PENTING:
+//  1. Anime TERAKHIR di daftar diakhiri }];  sedangkan anime lainnya diakhiri },
+//  2. Jumlah slot di v harus sama dengan e (e:12 berarti slot 1 sampai 12)
+//  3. Angka (id, y, e, l, day) TANPA kutip. Teks (t, p, d, genre, link) PAKAI kutip
+//  4. Pakai kutip biasa "  bukan kutip melengkung hasil copy dari Word atau chat
+//  5. Kutip di dalam teks ditulis \"  contoh: d:"Dia disebut \"Raja\" di sana."
+//  6. Status otomatis: l kurang dari e = Sedang Tayang | l sama dengan e = Selesai
+//  7. Kalau halaman jadi kosong setelah diedit, cek koma, kurung, atau kutip yang kelewat
+// ======================================================================================
+const DATA=[
+{id:1,t:"Frieren: Beyond Journey's End Season 1",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+  25:"",
+  26:"",
+  27:"",
+  28:"",
+ },
+ g:["Fantasy","Adventure","Drama"],y:2023,e:28,l:28,c:["#6d8cff","#b69cff"],d:"Setelah pasukan pahlawan mengalahkan raja iblis, penyihir elf Frieren yang berumur panjang menyadari betapa singkatnya waktu bersama teman-temannya, lalu memulai perjalanan untuk memahami arti hubungan antarmanusia."},
+{id:3,t:"Steins;Gate",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+ },
+ g:["Sci-Fi","Thriller"],y:2011,e:24,l:24,c:["#f97316","#be123c"],d:"Seorang mahasiswa eksentrik tanpa sengaja menemukan cara mengirim pesan ke masa lalu, dan setiap perubahan kecil membawa konsekuensi yang jauh lebih besar dari dugaannya."},
+{id:4,t:"Death Note",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+  25:"",
+  26:"",
+  27:"",
+  28:"",
+  29:"",
+  30:"",
+  31:"",
+  32:"",
+  33:"",
+  34:"",
+  35:"",
+  36:"",
+  37:"",
+ },
+ g:["Mystery","Thriller","Supernatural"],y:2006,e:37,l:37,c:["#111827","#7f1d1d"],d:"Seorang pelajar jenius menemukan buku catatan yang bisa membunuh siapa pun, lalu berhadapan dengan detektif misterius yang bertekad menangkapnya."},
+{id:5,t:"Hunter x Hunter (2011)",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+  25:"",
+  26:"",
+  27:"",
+  28:"",
+  29:"",
+  30:"",
+  31:"",
+  32:"",
+  33:"",
+  34:"",
+  35:"",
+  36:"",
+  37:"",
+  38:"",
+  39:"",
+  40:"",
+  41:"",
+  42:"",
+  43:"",
+  44:"",
+  45:"",
+  46:"",
+  47:"",
+  48:"",
+  49:"",
+  50:"",
+  51:"",
+  52:"",
+  53:"",
+  54:"",
+  55:"",
+  56:"",
+  57:"",
+  58:"",
+  59:"",
+  60:"",
+  61:"",
+  62:"",
+  63:"",
+  64:"",
+  65:"",
+  66:"",
+  67:"",
+  68:"",
+  69:"",
+  70:"",
+  71:"",
+  72:"",
+  73:"",
+  74:"",
+  75:"",
+  76:"",
+  77:"",
+  78:"",
+  79:"",
+  80:"",
+  81:"",
+  82:"",
+  83:"",
+  84:"",
+  85:"",
+  86:"",
+  87:"",
+  88:"",
+  89:"",
+  90:"",
+  91:"",
+  92:"",
+  93:"",
+  94:"",
+  95:"",
+  96:"",
+  97:"",
+  98:"",
+  99:"",
+  100:"",
+  101:"",
+  102:"",
+  103:"",
+  104:"",
+  105:"",
+  106:"",
+  107:"",
+  108:"",
+  109:"",
+  110:"",
+  111:"",
+  112:"",
+  113:"",
+  114:"",
+  115:"",
+  116:"",
+  117:"",
+  118:"",
+  119:"",
+  120:"",
+  121:"",
+  122:"",
+  123:"",
+  124:"",
+  125:"",
+  126:"",
+  127:"",
+  128:"",
+  129:"",
+  130:"",
+  131:"",
+  132:"",
+  133:"",
+  134:"",
+  135:"",
+  136:"",
+  137:"",
+  138:"",
+  139:"",
+  140:"",
+  141:"",
+  142:"",
+  143:"",
+  144:"",
+  145:"",
+  146:"",
+  147:"",
+  148:"",
+ },
+ g:["Action","Adventure","Fantasy"],y:2011,e:148,l:148,c:["#16a34a","#0ea5e9"],d:"Gon yang masih belia mengikuti ujian Hunter demi menemukan ayahnya, dan bertemu teman-teman yang mengubah arah petualangannya."},
+{id:7,t:"Kaguya-sama: Love Is War",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Romance","Comedy"],y:2019,e:12,l:12,c:["#db2777","#f9a8d4"],d:"Dua murid terbaik di sekolah elit sama-sama jatuh cinta, tetapi gengsi membuat keduanya berusaha agar pihak lain yang menyatakan perasaan lebih dulu."},
+{id:8,t:"Violet Evergarden",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+ },
+ g:["Drama","Fantasy"],y:2018,e:13,l:13,c:["#4f46e5","#38bdf8"],d:"Mantan prajurit bernama Violet bekerja sebagai penulis surat, dan perlahan memahami makna perasaan lewat kata-kata orang yang ia bantu."},
+{id:9,t:"Haikyu!!",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+  25:"",
+ },
+ g:["Sports","Comedy","Drama"],y:2014,e:25,l:25,c:["#ea580c","#fb923c"],d:"Seorang remaja bertubuh pendek yang gemar voli bergabung dengan tim sekolahnya dan bersaing dengan rival yang dulu mengalahkannya."},
+{id:10,t:"Spy x Family",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Action","Comedy","Slice of Life"],y:2022,e:12,l:12,c:["#15803d","#f472b6"],d:"Seorang mata-mata membentuk keluarga palsu demi sebuah misi, tanpa tahu bahwa istri dan anak angkatnya menyimpan rahasia sendiri."},
+{id:11,t:"Sono Bisque Doll wa Koi wo Suru Season 2",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Romance","Comedy","Slice of Life"],y:2025,e:12,l:12,c:["#e11d48","#fb7185"],d:"Gojo yang menekuni pembuatan boneka hina semakin mahir menjahit kostum cosplay untuk Marin, sementara perasaan Marin padanya makin sulit disembunyikan. Keduanya terus menjelajahi dunia cosplay bersama teman-teman baru."},
+{id:12,t:"Sono Bisque Doll wa Koi wo Suru",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Romance","Comedy","Slice of Life"],y:2022,e:12,l:12,c:["#be185d","#f9a8d4"],d:"Gojo, siswa pemalu yang mencintai pembuatan boneka hina, tanpa disangka diminta teman sekelasnya yang populer, Marin, untuk menjahit kostum cosplay. Dari sana, keduanya saling mengenal lewat kecintaan pada hobi masing-masing."},
+{id:13,t:"Chitose-kun wa Ramune Bin no Naka",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+ },
+ g:["Romance","Drama","Slice of Life"],y:2025,e:13,l:13,c:["#0ea5e9","#6ee7b7"],d:"Chitose Saku adalah siswa populer di sekolah persiapan terbaik di prefektur Fukui yang menikmati masa mudanya bersama teman-temannya. Segalanya mulai berubah ketika ia diminta membawa seorang teman sekelas yang mengurung diri kembali ke sekolah."},
+{id:14,t:"Chitose-kun wa Ramune Bin no Naka Part 2",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Romance","Drama","Slice of Life"],y:2026,e:12,l:1,day:1,c:["#0284c7","#fcd34d"],d:"Musim panas tiba dan turnamen antar-SMA dimulai. Haru memimpin klub basket sebagai kapten, sementara Chitose mulai ragu dengan keputusannya keluar dari tim bisbol setelah mantan rekan setimnya memintanya kembali."},
+{id:15,t:"Sekai Saikyou no Majo, Hajimemashita",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Adventure","Comedy"],y:2026,e:12,l:2,day:2,c:["#7c3aed","#22d3ee"],d:"Lorna diusir keluarganya karena kemampuannya dianggap tidak berguna. Ternyata ia bisa melihat semacam panduan strategi dunia yang tidak terlihat orang lain, dan memanfaatkannya untuk hidup bebas sebagai penyihir terkuat."},
+{id:16,t:"Tsuihou sareta Cheat Fuyo Majutsushi wa Kimama na Second Life wo Ouka suru",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Adventure","Comedy"],y:2026,e:12,l:1,c:["#0f766e","#facc15"],d:"Rain, penyihir yang bisa memberikan poin penguatan pada senjata maupun benda apa pun, keluar dari kelompoknya dan memulai hidup bebas sebagai petualang. Kini ia bebas memakai kemampuan curangnya sesuka hati."},
+{id:17,t:"Kyouran Reijou Nia Liston",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Action"],y:2026,e:12,l:2,day:1,c:["#9f1239","#f472b6"],d:"Seorang pendekar yang pernah membunuh dewa bereinkarnasi di tubuh Nia Liston, putri bangsawan yang sakit-sakitan. Dengan kemampuan bertarungnya, Nia menjalani hidup baru yang tak terduga, termasuk ikut acara populer keluarganya, Magic Vision."},
+{id:18,t:"Tensei Goblin dakedo Shitsumon Aru?",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Action","Isekai"],y:2026,e:12,l:3,day:0,c:["#16a34a","#1e3a8a"],d:"Pegawai kantoran baik hati, Akira Yagami, tewas menyelamatkan seorang anak dan bereinkarnasi sebagai goblin, ras yang biasanya hanya hidup tujuh hari. Dengan kemampuan khususnya, ia mencoba mengubah nasib para goblin di dunia barunya."},
+{id:19,t:"Doumo, Suki na Hito ni Horegusuri wo Irai sareta Majo desu.",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Romance","Comedy"],y:2026,e:12,l:1,c:["#be185d","#fde68a"],d:"Rose, penyihir yang tinggal sendiri di tepi danau, memendam perasaan pada ksatria Harij selama empat tahun. Saat Harij malah memintanya membuat ramuan cinta, Rose mengulur waktu dengan menyuruhnya mencari bahan-bahan yang rumit."},
+{id:20,t:"Tensei Kizoku, Kantei Skill de Nariagaru",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Adventure","Isekai"],y:2024,e:12,l:12,c:["#0369a1","#a3e635"],d:"Ars Louvent, anak bangsawan hasil reinkarnasi, memiliki skill penilai yang bisa melihat bakat orang. Ia memanfaatkannya untuk merekrut orang-orang berbakat dan membangun wilayahnya."},
+{id:21,t:"Tensei Kizoku, Kantei Skill de Nariagaru Season 2",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Adventure","Isekai"],y:2024,e:12,l:12,c:["#0e7490","#bef264"],d:"Ars terus memperkuat wilayahnya dengan orang-orang berbakat, sementara perebutan takhta dan konflik antarbangsawan di kerajaan makin memanas."},
+{id:22,t:"Tensei Kizoku, Kantei Skill de Nariagaru Season 3",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Adventure","Isekai"],y:2026,e:12,l:3,day:6,c:["#1d4ed8","#a3e635"],d:"Berkat jasanya dalam konflik perebutan takhta Missian, Ars mendapat kenaikan jabatan di luar dugaan: kini ia menjadi gubernur baru Canarre."},
+{id:23,t:"Mezametara Saikyou Soubi to Uchuusenmochi Datta node",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+ },
+ g:["Sci-Fi","Action","Isekai"],y:2026,e:13,l:2,day:6,c:["#1e40af","#22d3ee"],d:"Seseorang terbangun di dunia baru dengan perlengkapan terkuat dan sebuah pesawat luar angkasa. Ia bertekad hidup bebas sebagai tentara bayaran sambil mengejar impian memiliki rumah sendiri."},
+{id:24,t:"Yowaki MAX Reijou nanoni, Ratsuwan Konyakusha-sama no Kake ni Notte Shimatta",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Romance","Comedy","Fantasy"],y:2026,e:12,l:2,day:6,c:["#a21caf","#fda4af"],d:"Pia Rockwell mengingat kehidupan lampaunya dan sadar ia berperan sebagai tokoh antagonis di sebuah game otome. Ia ingin memutus pertunangan dengan Rufus lalu menjadi kurator museum fosil, tetapi Rufus justru mengajukan taruhan."},
+{id:25,t:"Tempal: Item no Chikara",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Action","Fantasy"],y:2026,e:12,l:1,c:["#92400e","#fbbf24"],d:"Seorang pemain game VR yang selalu bernasib sial mendapat warisan pandai besi legendaris, lalu perlahan menjadi pemain terkuat lewat kemampuan menempa item."},
+{id:26,t:"Kashita Maryoku wa \"Revo Barai\" de Kyousei Choushuu",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Action","Adventure"],y:2026,e:12,l:2,day:5,c:["#6d28d9","#f59e0b"],d:"Lent punya kemampuan meminjamkan sihir dalam jumlah besar kepada rekan-rekannya. Setelah dibuang dari kelompoknya, ia menemukan sisi lain kemampuannya, yaitu menagih kembali semua sihir yang ia pinjamkan beserta bunganya, ditemani peri kecil yang licik."},
+{id:27,t:"Romelia Senki",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+ },
+ g:["Fantasy","Action","Adventure"],y:2026,e:24,l:1,c:["#0f172a","#f43f5e"],d:"Setelah sang pangeran mengalahkan Raja Iblis, Romelia justru dicampakkan dan pertunangannya dibatalkan. Dengan kekuatan langka yang mendatangkan keberuntungan, ia membentuk pasukan sendiri untuk menyelamatkan rakyat yang masih tertindas."},
+{id:28,t:"Tensei shita Daiseijo wa, Seijo de Aru Koto wo Hitakakusu",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Action"],y:2026,e:12,l:3,c:["#7c3aed","#fde68a"],d:"Seorang santa agung bereinkarnasi ke kehidupan baru dan memilih menyembunyikan jati dirinya sebagai santa, sambil menghadapi berbagai kejadian di sekelilingnya."},
+{id:29,t:"Hyouken no Majutsushi ga Sekai wo Suberu",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Action","Fantasy"],y:2023,e:12,l:12,c:["#0ea5e9","#e0f2fe"],d:"Ray White dikenal sebagai Penyihir Pedang Es, pahlawan legendaris dalam perang. Hanya sedikit yang tahu identitasnya, dan ia memilih menjalani hidup sebagai siswa biasa di akademi sihir."},
+{id:30,t:"Hyouken no Majutsushi ga Sekai wo Suberu Season 2",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Action","Fantasy"],y:2026,e:12,l:1,day:3,c:["#2563eb","#a5f3fc"],d:"Akademi-akademi bersaing dalam turnamen sihir besar bernama Magicus War. Di tengah suasana meriah, sebuah ancaman misterius mulai mendekati Ray dan teman-temannya."},
+{id:31,t:"Tensei shitara Ken deshita",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Adventure","Isekai"],y:2022,e:12,l:12,c:["#475569","#38bdf8"],d:"Seorang pria bereinkarnasi sebagai pedang yang bisa berpikir dan berbicara, tanpa mengingat namanya. Ia menyelamatkan gadis beastkin bernama Fran, yang kemudian menjadi pemegangnya dan ingin menjadi lebih kuat."},
+{id:32,t:"Tensei shitara Ken deshita Season 2",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Fantasy","Adventure","Isekai"],y:2026,e:12,l:2,c:["#334155","#fb7185"],d:"Fran dan sang pedang melanjutkan perjalanan mereka. Keduanya terus menjadi lebih kuat sambil mencari tahu mengapa sang pedang ada di dunia ini."},
+{id:33,t:"Tsuihou sareta Tensei Juukishi wa Game Chishiki de Musou suru",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+ },
+ g:["Action","Fantasy","Adventure","Isekai"],y:2026,e:24,l:9,day:4,c:["#1f2937","#f59e0b"],d:"Elymas lahir di keluarga ahli pedang, tetapi mendapat kelas Heavy Knight yang dianggap cacat, lalu diusir. Ia teringat kehidupan lampaunya dan sadar dunia ini mirip game yang pernah ia kuasai, lalu memakai pengetahuannya untuk membuktikan kekuatan kelas itu."},
+{id:34,t:"Tensei shitara Slime Datta Ken Season 1",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+ },
+ g:["Fantasy","Adventure","Action","Comedy","Isekai"],y:2018,e:24,l:24,c:["#38bdf8","#1d4ed8"],d:"Seorang pria Jepang tewas lalu bereinkarnasi di dunia lain sebagai slime bernama Rimuru. Dengan kemampuan uniknya, ia berteman dengan para monster dan perlahan membangun negerinya sendiri."},
+{id:35,t:"Tensei shitara Slime Datta Ken OVA",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+ },
+ g:["Fantasy","Adventure","Action","Comedy","Isekai"],y:2019,e:5,l:5,c:["#0ea5e9","#a5f3fc"],d:"Kumpulan cerita sampingan tentang keseharian Rimuru dan warga Tempest, mulai dari mencari hiburan hingga acara latihan di luar sekolah saat ia menjadi guru."},
+{id:36,t:"Tensei shitara Slime Datta Ken: Coleus no Yume",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+ },
+ g:["Fantasy","Adventure","Action","Comedy","Isekai"],y:2023,e:3,l:3,c:["#0284c7","#c4b5fd"],d:"Berlatar di antara season 1 dan 2. Rimuru menyelidiki perebutan takhta di Kerajaan Coleus dan menemukan ada rencana besar yang melibatkan iblis di baliknya."},
+{id:37,t:"Tensei shitara Slime Datta Ken Season 2",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+ },
+ g:["Fantasy","Adventure","Action","Comedy","Isekai"],y:2021,e:24,l:24,c:["#2563eb","#7dd3fc"],d:"Setelah menjadi Raja Iblis, Rimuru memperluas Tempest sambil menghadapi ancaman dari kerajaan dan kekuatan besar di sekitarnya."},
+{id:38,t:"Tensei shitara Slime Datta Ken Movie: Guren no Kizuna",p:"",dl:{},v:{
+  1:"",
+ },
+ g:["Fantasy","Adventure","Action","Comedy","Isekai"],y:2022,e:1,l:1,c:["#dc2626","#38bdf8"],d:"Rimuru bertemu Hiiro, penyintas ras ogre, dan petualangan besar dengan banyak karakter baru pun dimulai."},
+{id:39,t:"Tensei shitara Slime Datta Ken Season 3",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+  14:"",
+  15:"",
+  16:"",
+  17:"",
+  18:"",
+  19:"",
+  20:"",
+  21:"",
+  22:"",
+  23:"",
+  24:"",
+ },
+ g:["Fantasy","Adventure","Action","Comedy","Isekai"],y:2024,e:24,l:24,c:["#1d4ed8","#67e8f9"],d:"Rimuru terus mengembangkan Tempest sambil menghadapi ketegangan baru dengan negara-negara besar di sekitarnya."},
+{id:40,t:"Overlord I",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+ },
+ g:["Fantasy","Action","Adventure","Isekai"],y:2015,e:13,l:13,c:["#4c1d95","#a78bfa"],d:"Saat server game online Yggdrasil ditutup, pemain bernama Momonga justru terjebak di dalam avatarnya, seorang penyihir kerangka. Ia memimpin Makam Agung Nazarick beserta para penghuninya yang setia, lalu mulai menjelajahi dunia baru yang tak ia kenal."},
+{id:41,t:"Overlord II",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+ },
+ g:["Fantasy","Action","Adventure","Isekai"],y:2018,e:13,l:13,c:["#581c87","#c084fc"],d:"Ainz, kini dikenal dengan nama itu, terus memperluas pengaruh Nazarick. Rencana-rencananya membawa Nazarick ke konflik dengan ras-ras lain di dunia baru ini."},
+{id:42,t:"Overlord III",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+ },
+ g:["Fantasy","Action","Adventure","Isekai"],y:2018,e:13,l:13,c:["#3b0764","#e879f9"],d:"Nazarick terlibat dalam konflik besar di Kerajaan Re-Estize, sementara rencana Ainz dan para bawahannya terus bergerak di balik layar."},
+{id:43,t:"Overlord IV",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+ },
+ g:["Fantasy","Action","Adventure","Isekai"],y:2022,e:13,l:13,c:["#312e81","#818cf8"],d:"Ainz kini memimpin Kerajaan Sihir, dan ambisi serta pengaruhnya terus meluas di dunia baru itu."},
+{id:44,t:"Overlord: The Sacred Kingdom (Movie 2024)",p:"",dl:{},v:{
+  1:"",
+ },
+ g:["Fantasy","Action","Adventure","Isekai"],y:2024,e:1,l:1,c:["#1e1b4b","#f59e0b"],d:"Dilanjutkan setelah musim 4, film ini mengisahkan arc Kerajaan Suci, ketika Nazarick mulai mengincar negeri baru."},
+{id:45,t:"Solo Leveling Season 1",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+ },
+ g:["Action","Fantasy","Adventure"],y:2024,e:12,l:12,c:["#0f172a","#6366f1"],d:"Sejak gerbang menuju dungeon muncul, para Hunter bertarung melawan monster. Sung Jin-woo, Hunter berperingkat terendah, selamat dari insiden maut di sebuah dungeon dan mendapat kemampuan unik untuk naik level tanpa batas. Dari situ ia mulai menjadi jauh lebih kuat."},
+{id:46,t:"Solo Leveling Season 2",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+  11:"",
+  12:"",
+  13:"",
+ },
+ g:["Action","Fantasy","Adventure"],y:2025,e:13,l:13,c:["#1e1b4b","#7c3aed"],d:"Berlanjut tepat setelah season 1, subjudulnya Arise from the Shadow. Jin-woo mendapat pekerjaan Raja Bayangan yang bisa memerintah pasukan bayangan, lalu mencari bahan ramuan air kehidupan yang mungkin menyembuhkan ibunya yang sakit, dan terjun ke pertempuran baru."},
+{id:47,t:"Frieren: Beyond Journey's End Season 2",p:"",dl:{},v:{
+  1:"",
+  2:"",
+  3:"",
+  4:"",
+  5:"",
+  6:"",
+  7:"",
+  8:"",
+  9:"",
+  10:"",
+ },
+ g:["Fantasy","Adventure","Drama"],y:2026,e:10,l:10,c:["#4f46e5","#a5b4fc"],d:"Frieren, Fern, dan Stark melanjutkan perjalanan melintasi wilayah utara. Di sepanjang jalan mereka bertemu sosok-sosok baru dan menghadapi bahaya, sementara Frieren terus mengenang masa-masa bersama kelompok pahlawannya."}];
+const $=s=>document.querySelector(s);
+const ADMIN=/[?&]admin/.test(location.search);
+if(!ADMIN)document.querySelector(".urlrow").style.display="none";
+let cur=null,ep=1,store={},genre="",tab="home",day=new Date().getDay()===0?6:new Date().getDay()-1;
+try{store=JSON.parse(localStorage.getItem("urls")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("urls",JSON.stringify(store))}catch(e){}};
+const grad=a=>`linear-gradient(160deg,${a.c[0]},${a.c[1]})`;
+const genres=[...new Set(DATA.flatMap(a=>a.g))].sort();
+function card(a){return `<div class="card" data-id="${a.id}"><div class="poster" style="background:${a.p?`url('${a.p}') center/cover`:grad(a)}"><span class="badge">${a.l<a.e?`● EP ${a.l}`:'TAMAT'}</span><span class="badge r">${a.y}</span></div><div class="ct">${a.t}</div></div>`}
+// Status otomatis: sedang tayang jika l (episode terakhir rilis) < e (total episode), selesai jika l >= e.
+const grouped=r=>{const on=r.filter(a=>a.l<a.e),done=r.filter(a=>a.l>=a.e);const sec=(t,l)=>l.length?`<h3 class="gh">${t} <small>(${l.length})</small></h3>`+l.map(card).join(""):"";return (sec("Sedang Tayang",on)+sec("Selesai",done))||'<div class="empty">Tidak ada hasil.</div>'};
+function render(){
+  $("#sbdonasi").innerHTML=donasiMini();mkqr();
+  $("#logo").innerHTML=SITE.logo?`<img src="${SITE.logo}" alt="AnimeKu" style="height:34px;vertical-align:middle">`:"Anime<b>Ku</b>";
+  const q=$("#q").value.toLowerCase();
+  let r=DATA.filter(a=>a.t.toLowerCase().includes(q)&&(!genre||a.g.includes(genre)));
+  if(tab==="home"&&!q&&!genre)r=[...r].sort((a,b)=>b.y-a.y||b.l-a.l);
+  $("#lt").textContent=genre?"Genre: "+genre:q?"Hasil pencarian":tab==="list"?"Daftar Anime (A–Z)":tab==="ongoing"?"Sedang Tayang":tab==="done"?"Selesai":"Semua Anime";
+  if(tab==="list")r=[...r].sort((a,b)=>a.t.localeCompare(b.t));
+  if(tab==="ongoing")r=r.filter(a=>a.l<a.e);
+  if(tab==="done")r=r.filter(a=>a.l>=a.e);
+  if(tab==="tentang"&&!q&&!genre){$("#lt").textContent="Tentang";$("#grid").innerHTML=tentang();mkqr()}else if(tab==="jadwal"&&!q&&!genre){$("#lt").textContent="Jadwal Rilis";$("#grid").innerHTML=sched()}else if(tab==="genre"&&!genre&&!q){$("#lt").textContent="Semua Genre";$("#grid").innerHTML=genres.map(g=>{const n=DATA.filter(a=>a.g.includes(g));return `<div class="gtile" data-g="${g}" style="background:${grad(n[0])}"><b>${g}</b><span>${n.length} anime</span></div>`}).join("")}else $("#grid").innerHTML=(tab==="home"||tab==="list")?grouped(r):(r.map(card).join("")||'<div class="empty">Tidak ada hasil.</div>');
+  $("#hero").style.background="linear-gradient(135deg,#e11d48,#7c3aed)";
+  $("#hero").innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px">${SITE.logo?`<img src="${SITE.logo}" alt="Logo AnimeKu" style="max-height:110px;max-width:80%">`:`<svg width="72" height="72" viewBox="0 0 72 72" role="img" aria-label="Logo AnimeKu"><rect width="72" height="72" rx="18" fill="#fff"/><path d="M28 21v30l25-15z" fill="#e11d48"/></svg><div style="font-size:42px;font-weight:900;letter-spacing:-1px;line-height:1">Anime<span style="color:#fde68a">Ku</span></div>`}<div style="font-size:15px;opacity:.95">Situs Nonton Anime Sub Indonesia</div></div>`;
+  $("#hero").style.display=(tab==="home"&&!q&&!genre)?"flex":"none";
+  $("#rank").innerHTML=[...DATA].sort((a,b)=>b.e-a.e).slice(0,5).map((a,i)=>`<div class="rank" data-id="${a.id}"><i>${i+1}</i><span>${a.t}</span></div>`).join("");
+  $("#chips").innerHTML=genres.map(g=>`<span class="chip ${g===genre?'on':''}" data-g="${g}">${g}</span>`).join("");
+  function sched(){return `<div style="grid-column:1/-1"><div class="days">${DAYS.map((d,i)=>`<span class="chip ${i===day?'on':''}" data-d="${i}">${d}</span>`).join("")}</div><div class="box">${DATA.filter(a=>a.day===day).map(a=>`<div class="sch" data-id="${a.id}"><span>${a.t}</span><span>EP ${a.l+1}</span></div>`).join("")||'<div class="empty">Tidak ada rilis.</div>'}</div></div>`}
+  
+  
+  
+  
+}
+function fillDl(){const d=cur.dl||{},ks=Object.keys(d).filter(k=>d[k]);$("#dllist").innerHTML="";ks.forEach(k=>{const a=document.createElement("a");a.className="btn";a.textContent="Ep "+k;a.href=d[k];a.target="_blank";a.rel="noopener noreferrer";a.style.cssText="text-align:center;padding:6px 0";$("#dllist").appendChild(a)});$("#dlnote").textContent=ks.length?"Hanya untuk file yang boleh didistribusikan.":"Belum ada file untuk diunduh. Untuk anime komersial, gunakan fitur tonton offline di aplikasi platform resmi."}
+const baseT=a=>a.t.replace(/ (Season|Part) \d+| \(\d{4}\)| OVA| Movie:.*|: Coleus no Yume| (I|II|III|IV)$|: The Sacred Kingdom.*/g,"").trim();
+function fillRec(){const sc=a=>a.g.filter(x=>cur.g.includes(x)).length+(baseT(a)===baseT(cur)?3:0);const r=DATA.filter(a=>a.id!==cur.id).map(a=>({a,s:sc(a)})).filter(x=>x.s>0).sort((x,y)=>y.s-x.s||y.a.y-x.a.y||y.a.l-x.a.l).slice(0,6).map(x=>x.a);$("#recs").innerHTML=r.map(card).join("")||'<div class="empty">Belum ada rekomendasi.</div>'}
+function open_(id){
+  cur=DATA.find(a=>a.id==id);ep=1;
+  $("#list").style.display="none";$("#view").style.display="block";
+  $("#vt").textContent=cur.t;$("#vd").innerHTML='<div class="vgl">Genre</div><div class="chips" id="vg"></div><div class="vgl" style="margin-top:14px">Sinopsis</div><p id="vs" style="margin:0"></p>';cur.g.forEach(g=>{const c=document.createElement("span");c.className="chip";c.textContent=g;$("#vg").appendChild(c)});$("#vs").textContent=cur.d;
+  $("#eps").innerHTML=Array.from({length:cur.e},(_,i)=>`<button data-e="${i+1}" class="${i?'':'on'}">${i+1}</button>`).join("");
+  fillDl();fillRec();load();window.scrollTo(0,0);
+}
+function load(){
+  const pu=(cur.v&&cur.v[ep])||(ADMIN?store[cur.id+"-"+ep]:"")||"";$("#url").value=pu;
+  $("#player").textContent=ADMIN?`Episode ${ep}: tempel URL video lalu tekan Putar.`:`Episode ${ep} belum tersedia.`;
+  if($("#url").value)play();
+}
+function play(){
+  const u=$("#url").value.trim();if(!u)return;
+  store[cur.id+"-"+ep]=u;save();$("#alt").textContent="";
+  const mg=u.match(/^https?:\/\/mega\.(?:nz|io)\/(?:file|embed)\/([\w-]+)(#[\w-]+)?/);
+  if(mg){const f=document.createElement("iframe");f.src="https://mega.nz/embed/"+mg[1]+(mg[2]||"");f.allow="autoplay; fullscreen";$("#alt").innerHTML='Tidak muncul? <a id="mgl" target="_blank" rel="noopener" style="color:var(--accent)">Buka di Mega</a>';$("#mgl").href=u;f.allowFullscreen=true;f.style.cssText="width:100%;height:100%;border:0";$("#player").innerHTML="";$("#player").appendChild(f);return}
+  const m=u.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
+  if(m){const f=document.createElement("iframe");f.src="https://www.youtube.com/embed/"+m[1];f.referrerPolicy="strict-origin-when-cross-origin";$("#alt").innerHTML='Tidak muncul? <a href="https://www.youtube.com/watch?v='+m[1]+'" target="_blank" rel="noopener" style="color:var(--accent)">Buka di YouTube</a>';f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.style.cssText="width:100%;height:100%;border:0";$("#player").innerHTML="";$("#player").appendChild(f);return}
+  const v=document.createElement("video");v.controls=true;v.autoplay=true;v.src=u;
+  v.onerror=()=>{$("#player").textContent="Video tidak bisa diputar. Cek URL atau format file."};
+  $("#player").innerHTML="";$("#player").appendChild(v);
+}
+function home(){$("#view").style.display="none";$("#list").style.display="block";$("#player").innerHTML=""}
+document.addEventListener("click",e=>{
+  const t=e.target;if(t.id==="csend"){location.href="mailto:"+SITE.email+"?subject="+encodeURIComponent(($("#cs").value||"Pesan dari AnimeKu")+" - "+($("#cn").value||"Pengunjung"))+"&body="+encodeURIComponent($("#cm").value);return}const c=t.closest("[data-id]");
+  if(c){open_(c.dataset.id);return}
+  const dd=t.closest("[data-d]");if(dd){day=+dd.dataset.d;render();return}
+  const gt=t.closest("[data-g]");if(gt){genre=genre===gt.dataset.g?"":gt.dataset.g;render();return}
+  
+  if(t.dataset.n){tab=t.dataset.n;genre="";document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.n===tab));home();render();return}
+  if(t.closest("#eps")&&t.dataset.e){ep=+t.dataset.e;document.querySelectorAll("#eps button").forEach(x=>x.classList.toggle("on",x===t));load()}
+});
+$("#back").onclick=home;$("#play").onclick=play;
+$("#q").oninput=()=>{home();render()};
+$("#th").onclick=()=>{const d=document.documentElement,dark=getComputedStyle(d).getPropertyValue("--bg").trim()==="#0e0e14";d.dataset.theme=dark?"light":"dark"};
+render();
+</script>
+</body>
+</html>
