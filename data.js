@@ -77,7 +77,7 @@ const DATA=[
   27:[{name:"Mega",url:""},{name:"MP4 / M3U8",url:""},{name:"Doodstream / StreamSB / StreamTape / Mp4Upload",url:""}],
   28:[{name:"Mega",url:""},{name:"MP4 / M3U8",url:""},{name:"Doodstream / StreamSB / StreamTape / Mp4Upload",url:""}],
  },
- g:["Fantasy","Adventure","Drama"],y:2023,e:28,l:28,c:["#6d8cff","#b69cff"],d:"Setelah pasukan pahlawan mengalahkan raja iblis, penyihir elf Frieren yang berumur panjang menyadari betapa singkatny..."},
+ g:["Fantasy","Adventure","Drama"],y:2023,e:28,l:28,c:["#6d8cff","#b69cff"],d:"Setelah pasukan pahlawan mengalahkan raja iblis, penyihir elf Frieren yang berumur panjang menyadari betapa singkatny[... ]"},
 {id:3,t:"Steins;Gate",p:"",v:{
   1:[{name:"Server 1",url:""},{name:"Server 2",url:""},{name:"Server 3",url:""}],
   2:[{name:"Server 1",url:""},{name:"Server 2",url:""},{name:"Server 3",url:""}],
@@ -104,6 +104,6 @@ const DATA=[
   23:[{name:"Server 1",url:""},{name:"Server 2",url:""},{name:"Server 3",url:""}],
   24:[{name:"Server 1",url:""},{name:"Server 2",url:""},{name:"Server 3",url:""}],
  },
- g:["Sci-Fi","Thriller"],y:2011,e:24,l:24,c:["#f97316","#be123c"],d:"Seorang mahasiswa eksentrik tanpa sengaja menemukan cara mengirim pesan ke masa lalu, dan setiap perubahan kecil membawa konse...",
+ g:["Sci-Fi","Thriller"],y:2011,e:24,l:24,c:["#f97316","#be123c"],d:"Seorang mahasiswa eksentrik tanpa sengaja menemukan cara mengirim pesan ke masa lalu, dan setiap perubahan kecil membawa konse[...]",
 // (file continues...)
 ];
