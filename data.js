@@ -370,7 +370,7 @@ const DATA=[
   12:"",
  },
  g:["Action","Comedy","Slice of Life"],y:2022,e:12,l:12,c:["#15803d","#f472b6"],d:"Seorang mata-mata membentuk keluarga palsu demi sebuah misi, tanpa tahu bahwa istri dan anak angkatnya menyimpan rahasia sendiri."},
-{id:11,t:"Sono Bisque Doll wa Koi wo Suru Season 2",p:"",v:{
+{id:11,t:"Sono Bisque Doll wa Koi wo Suru Season 2",p:"img/sono-bisque-doll-s2.jpg",v:{
   1:"https://mega.nz/file/pcs0gJRY#EBIU6VSLJ0w8aZagTWY0p73zD5MXjWqqSGu8Z1B1jvM",
   2:"https://mega.nz/file/pcs0gJRY#EBIU6VSLJ0w8aZagTWY0p73zD5MXjWqqSGu8Z1B1jvM",
   3:"https://mega.nz/file/EE0U3RQB#jojXu2Jg5_Bp5yttU--x86MzCbaTxnwlMkPZD3iTt68",
