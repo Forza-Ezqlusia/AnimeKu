@@ -1,1 +1,0 @@
-Taruh poster dan logo di folder ini, lalu tulis path-nya di data.js, misalnya p:"img/frieren.jpg" atau logo:"img/logo.png".
